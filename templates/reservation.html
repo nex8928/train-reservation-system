@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Reservation</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Reservation Form</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <form id="reservationForm" method="POST">
+            <label for="trainNumber">Train Number:</label>
+            <input type="text" id="trainNumber" name="trainNumber" required>
+            
+            <label for="trainName">Train Name:</label>
+            <input type="text" id="trainName" name="trainName" readonly>
+            
+            <label for="classType">Class Type:</label>
+            <select id="classType" name="classType" required>
+                <option value="Sleeper">Sleeper</option>
+                <option value="AC">AC</option>
+            </select>
+            
+            <label for="journeyDate">Date of Journey:</label>
+            <input type="date" id="journeyDate" name="journeyDate" required>
+            
+            <label for="from">From:</label>
+            <input type="text" id="from" name="from" required>
+            
+            <label for="to">To:</label>
+            <input type="text" id="to" name="to" required>
+            
+            <button type="submit">Reserve</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

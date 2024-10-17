@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Post Login Options</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome! What would you like to do?</h2>
+        <div class="button-group">
+            <a href="{{ url_for('reserve') }}"><button>Make a Reservation</button></a>
+            <a href="{{ url_for('cancel') }}"><button>Cancel a Reservation</button></a>
+        </div>
+    </div>
+</body>
+</html>

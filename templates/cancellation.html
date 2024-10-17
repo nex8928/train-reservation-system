@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Cancel Ticket</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Cancellation Form</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <form id="cancellationForm" method="POST">
+            <label for="pnr">PNR Number:</label>
+            <input type="text" id="pnr" name="pnr" required>
+            <button type="submit">Check Details</button>
+        </form>
+
+        {% if reservation %}
+        <h3>Reservation Details</h3>
+        <p>Train Name: {{ reservation.train_name }}</p>
+        <p>Train Number: {{ reservation.train_number }}</p>
+        <p>Journey Date: {{ reservation.journey_date }}</p>
+        <p>Class Type: {{ reservation.class_type }}</p>
+        <p>Seat Number: {{ reservation.seat_number }}</p>
+        <form method="POST" action="{{ url_for('confirm_cancellation') }}">
+            <input type="hidden" name="pnr" value="{{ reservation.pnr_number }}">
+            <button type="submit">Confirm Cancellation</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>
